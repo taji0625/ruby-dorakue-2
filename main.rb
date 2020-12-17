@@ -8,6 +8,7 @@ class Character
   end
 end
 
+
 class Brave < Character
 
   def initialize(**params)
@@ -17,8 +18,11 @@ class Brave < Character
   def attack(monster)
     puts "#{monster.name} があらわれた！"
     puts "#{@name} の攻撃！"
-    puts "#{monster.name} に #{(@offense - monster.defense) / 2} のダメージを与えた！"
+    offensive_power = (@offense - monster.defense) / 2
+    puts "#{monster.name} に #{offensive_power} のダメージを与えた！"
+    monster.hp = monster.hp - offensive_power
   end
+
 end
 
 class Monster < Character
@@ -29,7 +33,15 @@ class Monster < Character
 
   def attack(brave)
     puts "#{@name}の攻撃！"
-    puts "#{brave.name} は #{(@offense - brave.defense) / 2} のダメージを受けた！"
+    offensive_power = (@offense - brave.defense) / 2
+    puts "#{brave.name} は #{offensive_power} のダメージを受けた！"
+    brave.hp = brave.hp - offensive_power
+    puts <<~TEXT
+    *=*=*=*=*=*=*=*=*=*=**=*=*=*=*=*=*=*
+    【#{brave.name}】HP: #{brave.hp}
+    【#{@name}】HP: #{@hp}
+    *=*=*=*=*=*=*=*=*=*=**=*=*=*=*=*=*=*
+    TEXT
   end
 end
 
