@@ -3,8 +3,8 @@ require "./monster"
 
 
 
-brave = Brave.new(name: "ゆうしゃ", hp: 300, offense: 189, defense: 88)
-monster = Monster.new(name: "アークデーモン", hp: 300, offense: 142, defense: 65)
+brave = Brave.new(name: "ゆうしゃ", hp: 300, offense: 300, defense: 100)
+monster = Monster.new(name: "アークデーモン", hp: 300, offense: 300, defense: 100)
 
 puts "#{monster.name} があらわれた！"
 

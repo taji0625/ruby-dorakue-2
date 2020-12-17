@@ -8,7 +8,7 @@ class Monster < Character
 
   def attack(brave)
     puts "#{@name}の攻撃！"
-    offensive_power = (@offense - brave.defense) / 2
+    offensive_power = (@offense - brave.defense) / rand(2..8)
     puts "#{brave.name} は #{offensive_power} のダメージを受けた！"
     brave.hp = brave.hp - offensive_power
     if @hp < 0
