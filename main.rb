@@ -1,54 +1,36 @@
-class Character
-  attr_accessor :name, :hp, :offense, :defense
-  def initialize(**params)
-    @name = params[:name]
-    @hp = params[:hp]
-    @offense = params[:offense]
-    @defense = params[:defense]
-  end
-end
+require "./brave"
+require "./monster"
 
-
-class Brave < Character
-
-  def initialize(**params)
-    super(**params)
-  end
-
-  def attack(monster)
-    puts "#{monster.name} があらわれた！"
-    puts "#{@name} の攻撃！"
-    offensive_power = (@offense - monster.defense) / 2
-    puts "#{monster.name} に #{offensive_power} のダメージを与えた！"
-    monster.hp = monster.hp - offensive_power
-  end
-
-end
-
-class Monster < Character
-
-  def initialize(**params)
-    super(**params)
-  end
-
-  def attack(brave)
-    puts "#{@name}の攻撃！"
-    offensive_power = (@offense - brave.defense) / 2
-    puts "#{brave.name} は #{offensive_power} のダメージを受けた！"
-    brave.hp = brave.hp - offensive_power
-    puts <<~TEXT
-    *=*=*=*=*=*=*=*=*=*=**=*=*=*=*=*=*=*
-    【#{brave.name}】HP: #{brave.hp}
-    【#{@name}】HP: #{@hp}
-    *=*=*=*=*=*=*=*=*=*=**=*=*=*=*=*=*=*
-    TEXT
-  end
-end
 
 
 brave = Brave.new(name: "ゆうしゃ", hp: 300, offense: 189, defense: 88)
-monster = Monster.new(name: "アークデーモン", hp: 300, offense: 152, defense: 65)
+monster = Monster.new(name: "アークデーモン", hp: 300, offense: 142, defense: 65)
 
-brave.attack(monster)
-monster.attack(brave)
+puts "#{monster.name} があらわれた！"
+
+loop do
+  if brave.hp > 0
+    brave.attack(monster)
+  else
+    puts "#{brave.name} はしんでしまった！"
+    break
+  end
+  
+  if monster.hp > 0
+    monster.attack(brave)
+  else
+    if monster.hp < 0
+      monster.hp = 0
+    end
+    puts <<~TEXT
+    *=*=*=*=*=*=*=*=*=*=**=*=*=*=*=*=*=*
+    【#{brave.name}】HP: #{brave.hp}
+    【#{monster.name}】HP: #{monster.hp}
+    *=*=*=*=*=*=*=*=*=*=**=*=*=*=*=*=*=*
+    TEXT
+    puts "#{monster.name} をやっつけた！"
+    break
+  end
+end
+
 
