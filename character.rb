@@ -6,4 +6,14 @@ class Character
     @offense = params[:offense]
     @defense = params[:defense]
   end
+
+  def info(brave, monster)
+    puts <<~TEXT
+    *=*=*=*=*=*=*=*=*=*=**=*=*=*=*=*=*=*
+    【#{brave.name}】HP: #{brave.hp}
+    【#{monster.name}】HP: #{monster.hp}
+    *=*=*=*=*=*=*=*=*=*=**=*=*=*=*=*=*=*
+    
+    TEXT
+  end
 end

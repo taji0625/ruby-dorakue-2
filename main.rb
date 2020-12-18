@@ -2,7 +2,7 @@ require "./brave"
 require "./monster"
 
 
-
+character = Character.new
 brave = Brave.new(name: "ゆうしゃ", hp: 300, offense: 300, defense: 100)
 monster = Monster.new(name: "アークデーモン", hp: 300, offense: 300, defense: 100)
 
@@ -18,16 +18,9 @@ loop do
   
   if monster.hp > 0
     monster.attack(brave)
+    character.info(brave, monster)
   else
-    if monster.hp < 0
-      monster.hp = 0
-    end
-    puts <<~TEXT
-    *=*=*=*=*=*=*=*=*=*=**=*=*=*=*=*=*=*
-    【#{brave.name}】HP: #{brave.hp}
-    【#{monster.name}】HP: #{monster.hp}
-    *=*=*=*=*=*=*=*=*=*=**=*=*=*=*=*=*=*
-    TEXT
+    character.info(brave, monster)
     puts "#{monster.name} をやっつけた！"
     break
   end
