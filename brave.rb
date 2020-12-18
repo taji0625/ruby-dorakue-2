@@ -8,9 +8,7 @@ class Brave < Character
     puts "#{monster.name} に #{offensive_power} のダメージを与えた！"
     puts ""
     monster.hp = monster.hp - offensive_power
-    if monster.hp < 0
-      monster.hp = 0
-    end
+    monster.hp = 0 if monster.hp < 0
   end
 
 end
